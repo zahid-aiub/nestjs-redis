@@ -9,6 +9,10 @@ import { RedisModule } from '@liaoliaots/nestjs-redis';
       config: {
         host: 'localhost',
         port: 6379,
+        maxRetriesPerRequest: 100, // Increase the retry limit
+        retryStrategy: (times) => {
+          return Math.min(times * 50, 2000);
+        },
       },
     }),
   ],
